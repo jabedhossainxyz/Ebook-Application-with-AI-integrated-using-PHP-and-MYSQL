@@ -1,20 +1,22 @@
 <?php
 session_start();
 
-// Simulated user data (replace with database retrieval)
-$validUsername = 'exampleuser';
-$validPassword = password_hash('examplepassword', PASSWORD_DEFAULT);
+require_once '../database/connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if ($username === $validUsername && password_verify($password, $validPassword)) {
+    $query = "SELECT * FROM `ebook`.`users` WHERE username = '$username' AND password = '$password'";
+    $result = $conn->query($query);
+    $user = $result->fetch_assoc();
+
+    if ($user) {
         $_SESSION['username'] = $username;
-        header('Location: dashboard.php'); // Redirect to dashboard or another page
+        header('Location: ../views/dashboard.php');
         exit();
     } else {
-        header('Location: login.php?error=1'); // Redirect back to login with error flag
+        header("Location: login.php?error=Invalid username or password");
         exit();
     }
 }

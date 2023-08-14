@@ -21,26 +21,47 @@ if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
         <style>
                 body {
                         background-color: #f8f9fa;
-                        display: flex;
                         align-items: center;
                         justify-content: center;
                         height: 75vh;
                 }
 
-                .is-invalid {
-                        border-color: red !important;
+                .navbar {
+                        background-color: #333;
                 }
 
-                .registration-container label,
-                .registration-container input,
-                .registration-container small,
-                .registration-container .btn {
-                        font-size: 14px;
+                .navbar-nav {
+                        margin: auto;
+                }
+
+                .nav-link:hover {
+                        color: #ddd;
                 }
         </style>
+
 </head>
 
 <body>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                                <a class="nav-link active" aria-current="page" href="../views/index.php">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="../contact/contact.php">Contact</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="../contact/about.php">About Us</a>
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
+        </nav>
         <form class="registration-container" action="register_process.php" method="POST" onsubmit="return validateForm()">
                 <h2 class="text-center mb-4">Registration</h2>
                 <div class="mb-3">
@@ -72,8 +93,12 @@ if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
                         <div id="passwordMatchHelp" class="form-text text-danger" style="display: none;">Passwords must match.</div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Register</button>
-                <p>Already have an account? <a href="login.php">Login</a></p>
+                <div class="button-group">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button type="reset" class="btn btn-warning">Clear</button>
+                </div>
+
+                <p class="center-text">Already have an account? <a href="login.php">Login</a></p>
         </form>
 
         <script>

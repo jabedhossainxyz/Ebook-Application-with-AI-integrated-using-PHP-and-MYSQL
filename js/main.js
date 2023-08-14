@@ -1,4 +1,4 @@
-// main.js
+
 document.addEventListener("DOMContentLoaded", function () {
   const recommendedBooksElement = document.getElementById("recommended-books");
 

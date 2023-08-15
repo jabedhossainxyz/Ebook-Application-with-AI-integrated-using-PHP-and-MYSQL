@@ -2,16 +2,14 @@
 session_start();
 require_once '../database/connect.php';
 
-// Debug statement to check if session is set
+// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-        echo "Session not set"; // Debug statement
+        header('Location: ../auth/login.php');
         exit();
 }
 
+// Fetch user's information from the database
 $userID = $_SESSION['user_id'];
-
-// Debug statement to check if $userID is correct
-echo "User ID: " . $userID . "<br>"; // Debug statement
 
 $sql = "SELECT * FROM `ebook`.`users` WHERE id = ?";
 $stmt = $conn->prepare($sql);

@@ -11,6 +11,7 @@ require '../database/connect.php';
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>E-Book</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
         <style>
                 .navbar {
                         background-color: #333;
@@ -111,7 +112,9 @@ require '../database/connect.php';
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                                                         <li><a class="dropdown-item" href="../profile/view_profile.php">Profile</a></li>
-                                                        <li><a class="dropdown-item" href="../profile/change_password.php">Change Password</a></li>
+                                                        <li class="nav-item">
+                                                                <a class="nav-link" href="../profile/change_password_modal.php" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</a>
+                                                        </li>
                                                         <li><a class="dropdown-item" href="../auth/logout.php">Logout</a></li>
                                                 </ul>
                                         </li>
@@ -211,6 +214,7 @@ require '../database/connect.php';
                 </script>
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

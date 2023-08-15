@@ -1,21 +1,43 @@
-<div class="book-details">
-    <?php
-    // Display the book cover image if available
-    if ($book['cover_image']) {
-        $imageData = $book['cover_image'];
-        $imageFormat = 'image/png'; // Change this to 'image/jpeg' if the image format is JPEG
-        $base64Image = 'data:' . $imageFormat . ';base64,' . base64_encode($imageData);
-        echo '<img src="' . $base64Image . '" alt="' . $book['title'] . '" class="book-cover">';
-    } else {
-        echo '<p>No cover image available</p>';
-    }
-    ?>
-    <h1><?php echo $book['title']; ?></h1>
-    <p><?php echo $book['author']; ?></p>
-    <p>Published Year: <?php echo $book['published_year']; ?></p>
-    
-    <!-- Add a button to initiate the PDF download -->
-    <a class="btn btn-primary" href="download_pdf.php?id=<?php echo $book['id']; ?>">Download PDF</a>
-    
-    <a class="btn btn-primary" href="../views/dashboard.php">Back to Dashboard</a>
-</div>
+<?php
+session_start();
+require_once '../database/connect.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../auth/login.php');
+    exit();
+}
+
+$userID = $_SESSION['user_id'];
+$sql = "SELECT * FROM `users` WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('i', $userID);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 1) {
+    $user = $result->fetch_assoc();
+} else {
+    echo 'User not found.';
+    exit();
+}
+
+$stmt->close();
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Your HTML head content -->
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Profile Information</h2>
+        <p><strong>Name:</strong> <?php echo $user['name']; ?></p>
+        <p><strong>Username:</strong> <?php echo $user['username']; ?></p>
+        <p><strong>Email:</strong> <?php echo $user['email']; ?></p>
+        <p><strong>Mobile:</strong> <?php echo $user['mobile']; ?></p>
+        <a class="btn btn-primary" href="../views/dashboard.php">Back to Dashboard</a>
+    </div>
+</body>
+</html>

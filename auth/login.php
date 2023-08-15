@@ -1,9 +1,15 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+session_start();
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Validate user credentials and set session if valid
+        // ...
+        // Assuming the user ID is stored in $user_id after successful login
+        $_SESSION['user_id'] = $user_id;
+        header('Location: ../views/dashboard.php'); // Redirect to dashboard
+        exit();
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +33,7 @@ ini_set('display_errors', '1');
                 }
 
                 .navbar-nav {
-                       margin: auto;
+                        margin: auto;
                 }
 
                 .nav-link:hover {

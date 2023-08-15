@@ -102,13 +102,21 @@ require '../database/connect.php';
                                         <li class="nav-item">
                                                 <a class="nav-link" href="../books/add_books.php">Add Books</a>
                                         </li>
-                                        <!-- ...other menu items... -->
+
                                 </ul>
                                 <ul class="navbar-nav ml-auto">
-                                        <li class="nav-item">
-                                                <a class="nav-link" href="../auth/logout.php">Logout</a>
+                                        <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Profile
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                                        <li><a class="dropdown-item" href="../profile/view_profile.php">Profile</a></li>
+                                                        <li><a class="dropdown-item" href="../profile/change_password.php">Change Password</a></li>
+                                                        <li><a class="dropdown-item" href="../auth/logout.php">Logout</a></li>
+                                                </ul>
                                         </li>
                                 </ul>
+
                         </div>
                 </div>
         </nav>

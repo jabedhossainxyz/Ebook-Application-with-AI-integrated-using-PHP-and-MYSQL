@@ -12,7 +12,6 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <!-- Additional styles for alert messages -->
     <style>
         .alert {
             font-size: 14px;
@@ -26,7 +25,6 @@ session_start();
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">Change Password</a>
@@ -39,7 +37,7 @@ session_start();
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h2>Change Password</h2>
+
                 <?php
                 if (!empty($_SESSION['success'])) {
                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">

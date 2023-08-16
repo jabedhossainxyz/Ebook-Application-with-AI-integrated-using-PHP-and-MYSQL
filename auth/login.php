@@ -1,14 +1,8 @@
 <?php
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Validate user credentials and set session if valid
-        // ...
-        // Assuming the user ID is stored in $user_id after successful login
-        $_SESSION['user_id'] = $user_id;
-        header('Location: ../views/dashboard.php'); // Redirect to dashboard
-        exit();
-}
+$error = isset($_SESSION['login_error']) ? $_SESSION['login_error'] : "";
+unset($_SESSION['login_error']); // Clear the error message after displaying
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         margin: auto;
                 }
 
-                .nav-link:hover {
-                        color: #ddd;
+                .alert-danger {
+                        font-size: 14px;
+                        width: 275px;
+                        margin: 5px auto;
+                        padding: 15px;
+                        display: flex;
+                        align-content: center;
                 }
         </style>
 </head>
@@ -66,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <form class="login-container" action="login_process.php" method="POST">
                 <h2 class="text-center mb-4">Login</h2>
+
                 <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -74,6 +74,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
                 </div>
+
+                <?php
+                // Display error message if present
+                if (!empty($error)) {
+                        echo '<div class="alert alert-danger alert-dismissible fade show small-error" role="alert">';
+                        echo '<strong>Error!</strong> ' . $error;
+                        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                        echo '</div>';
+                }
+                ?>
+
                 <div class="button-group">
                         <button type="submit" class="btn btn-primary">Login</button>
                         <button type="reset" class="btn btn-warning">Clear</button>
@@ -81,7 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <p class="center-text">Doesn't have an account? <a href="register.php">Register</a></p>
         </form>
-
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

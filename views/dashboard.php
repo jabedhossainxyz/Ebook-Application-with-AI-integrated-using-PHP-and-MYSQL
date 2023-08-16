@@ -1,7 +1,8 @@
 <?php
-require '../database/connect.php';
-?>
 
+require '../database/connect.php';
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">

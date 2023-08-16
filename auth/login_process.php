@@ -7,8 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM `ebook`.`users` WHERE username = '$username' AND password = '$password'";
-    $result = $conn->query($query);
+    // Using prepared statement to prevent SQL injection
+    $query = "SELECT * FROM `ebook`.`users` WHERE username = ? AND password = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
     if ($user) {
@@ -16,7 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ../views/dashboard.php');
         exit();
     } else {
-        header("Location: login.php?error=Invalid username or password");
+        $_SESSION['login_error'] = "Invalid username or password";
+        header("Location: login.php");
         exit();
     }
 }
+
+$conn->close();

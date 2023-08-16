@@ -6,11 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Add Book</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 
 <body>
+
+
         <div class="container d-flex justify-content-center align-items-center vh-100">
                 <div class="w-50">
+                        <a class="btn btn-primary" href="../views/dashboard.php">
+                                <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
                         <h1 class="text-center mb-4">Add Book</h1>
                         <form action="add_book_process.php" method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
@@ -40,8 +47,7 @@
                                         <input type="file" name="book_file" class="form-control" accept=".pdf" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Add Book</button>
-                        </form><br><br>
-                        <a class="btn btn-primary" href="../views/dashboard.php">Back to Dashboard</a>
+                        </form>
                 </div>
         </div>
 

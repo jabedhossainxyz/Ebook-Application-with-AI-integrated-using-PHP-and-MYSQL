@@ -1,62 +1,74 @@
 <?php
 session_start();
-require_once '../database/connect.php';
+?>
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $userID = $_SESSION['user_id'];
-    $currentPassword = $_POST['current_password'];
-    $newPassword = $_POST['new_password'];
-    $confirmPassword = $_POST['confirm_password'];
+<!DOCTYPE html>
+<html lang="en">
 
-    // Fetch user's current password from the database
-    $sql = "SELECT password FROM `ebook`.`users` WHERE id = ?";
-    $stmt = $conn->prepare($sql);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Password</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    if (!$stmt) {
-        echo "Prepare failed: " . $conn->error;
-        exit();
-    }
+</head>
 
-    $stmt->bind_param('i', $userID);
-    $stmt->execute();
-    $result = $stmt->get_result();
+<body>
 
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-        $storedPassword = $user['password'];
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Change Password</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
 
-        // Verify current password
-        if ($currentPassword === $storedPassword) {
-            // Update the password in the database
-            $updateSql = "UPDATE `ebook`.`users` SET password = ? WHERE id = ?";
-            $updateStmt = $conn->prepare($updateSql);
+    <div class="container mt-5">
+        <div class="row">
 
-            if (!$updateStmt) {
-                echo "Prepare failed: " . $conn->error;
-                exit();
-            }
+            <div class="col-md-6 offset-md-3">
 
-            $updateStmt->bind_param('si', $newPassword, $userID);
-            $updateStmt->execute();
+                <h2>Change Password</h2>
+                <?php
+                if (!empty($success)) {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        ' . $success . '
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+                } elseif (!empty($error)) {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <span class="mr-2">&#9888;</span>' . $error . '
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+                }
+                ?>
 
-            if ($updateStmt->affected_rows > 0) {
-                $passwordChanged = true;
-            } else {
-                $passwordChanged = false;
-            }
+                <form action="change_password_process.php" method="POST">
+                    <div class="mb-3">
+                        <label for="current_password" class="form-label">Current Password</label>
+                        <input type="password" class="form-control" id="current_password" name="current_password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="new_password" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="new_password" name="new_password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirm_password" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                </form>
+                <br><br>
+                <a class="btn btn-primary" href="../views/dashboard.php">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
 
-            $updateStmt->close();
-        } else {
-            $passwordMismatch = true;
-        }
-    } else {
-        echo 'User not found.';
-        exit();
-    }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-    $stmt->close();
-    $conn->close();
-}
-
-header('Location: ../views/dashboard.php');
-exit();
+</html>

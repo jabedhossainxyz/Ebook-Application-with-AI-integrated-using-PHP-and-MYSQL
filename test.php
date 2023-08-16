@@ -1,22 +1,14 @@
-<!-- ... Previous HTML code ... -->
-
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h2 class="mb-4">Get in Touch</h2>
-            <?php
-            if (isset($_GET['success']) && $_GET['success'] === 'true') {
-                echo '<div class="alert alert-success" role="alert">';
-                echo 'Thank you for your message! We will get back to you soon.';
-                echo '</div>';
-            }
-            ?>
-            <form action="contact_process.php" method="POST">
-                <!-- ... Form fields ... -->
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- ... Rest of the HTML code ... -->
+<!-- Display success or error message if present -->
+<?php
+if (!empty($success)) {
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        ' . $success . '
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+} elseif (!empty($error)) {
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <span class="mr-2">&#9888;</span>' . $error . '
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+}
+?>

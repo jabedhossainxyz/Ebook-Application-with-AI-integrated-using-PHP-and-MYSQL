@@ -91,7 +91,7 @@ require '../database/connect.php';
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -113,9 +113,7 @@ require '../database/connect.php';
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                                                         <li><a class="dropdown-item" href="../profile/view_profile.php">Profile</a></li>
-                                                        <li class="nav-item">
-                                                                <a class="nav-link" href="../profile/change_password_modal.php" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</a>
-                                                        </li>
+                                                        <li><a class="dropdown-item" href="../profile/change_password.php">Change Password</a></li>
                                                         <li><a class="dropdown-item" href="../auth/logout.php">Logout</a></li>
                                                 </ul>
                                         </li>

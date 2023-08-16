@@ -5,14 +5,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Contact Us</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-lg bg-light">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">
-                        <a class="navbar-brand" href="#">Ebook</a>
+                        <a class="navbar-brand" href="#">Contact Us</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                         </button>
@@ -22,7 +22,7 @@
                                                 <a class="nav-link" href="../views/index.php">Home</a>
                                         </li>
                                         <li class="nav-item active">
-                                                <a class="nav-link" href="contact.php">Contact</a>
+                                                <a class="nav-link" href="about.php">About Us</a>
                                         </li>
                                 </ul>
                         </div>
@@ -33,20 +33,13 @@
                 <div class="row">
                         <div class="col-md-6 offset-md-3">
                                 <h2 class="mb-4">Get in Touch</h2>
-                                <?php
-                                if (isset($_GET['success']) && $_GET['success'] === 'true') {
-                                        echo '<div class="alert alert-success" role="alert">';
-                                        echo 'Thank you for your message! We will get back to you soon.';
-                                        echo '</div>';
-                                }
-                                ?>
                                 <form action="contact_process.php" method="POST">
                                         <div class="mb-3">
-                                                <label for="name" class="form-label">Name</label>
+                                                <label for="name" class="form-label">Your Name</label>
                                                 <input type="text" class="form-control" id="name" name="name" required>
                                         </div>
                                         <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
+                                                <label for="email" class="form-label">Email Address</label>
                                                 <input type="email" class="form-control" id="email" name="email" required>
                                         </div>
                                         <div class="mb-3">
@@ -59,7 +52,7 @@
                 </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

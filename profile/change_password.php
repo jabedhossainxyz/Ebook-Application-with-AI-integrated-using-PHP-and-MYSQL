@@ -12,6 +12,17 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    <!-- Additional styles for alert messages -->
+    <style>
+        .alert {
+            font-size: 14px;
+            width: 275px;
+            margin: 5px auto;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,21 +38,21 @@ session_start();
 
     <div class="container mt-5">
         <div class="row">
-
             <div class="col-md-6 offset-md-3">
-
                 <h2>Change Password</h2>
                 <?php
-                if (!empty($success)) {
+                if (!empty($_SESSION['success'])) {
                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        ' . $success . '
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>';
-                } elseif (!empty($error)) {
+                        ' . $_SESSION['success'] . '
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+                    unset($_SESSION['success']); // Clear the success message
+                } elseif (!empty($_SESSION['error'])) {
                     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <span class="mr-2">&#9888;</span>' . $error . '
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>';
+                        <span class="mr-2">&#9888;</span>' . $_SESSION['error'] . '
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+                    unset($_SESSION['error']); // Clear the error message
                 }
                 ?>
 

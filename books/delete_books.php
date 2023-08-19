@@ -1,4 +1,12 @@
 <?php
+require '../database/connect.php';
+
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: ../auth/login.php");
+    exit;
+}
+
 // Check if a book ID is provided through GET request
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $bookId = $_GET['id'];

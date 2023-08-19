@@ -3,6 +3,7 @@ session_start();
 
 require_once '../database/connect.php';
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $currentPassword = $_POST['current_password'];
     $newPassword = $_POST['new_password'];

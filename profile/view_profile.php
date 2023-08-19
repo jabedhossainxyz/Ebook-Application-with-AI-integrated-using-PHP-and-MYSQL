@@ -4,8 +4,8 @@ require_once '../database/connect.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-        header('Location: ../auth/login.php');
-        exit();
+    header("Location: ../auth/login.php");
+    exit;
 }
 
 // Fetch user's information from the database

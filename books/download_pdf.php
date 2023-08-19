@@ -1,6 +1,13 @@
 <?php
 require '../database/connect.php';
 
+
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: ../auth/login.php");
+    exit;
+}
+
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $bookId = $_GET['id'];
 

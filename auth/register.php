@@ -74,7 +74,7 @@ if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
                 </div>
                 <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">Your email won't be shared.</div>
                 </div>
                 <div class="mb-3">

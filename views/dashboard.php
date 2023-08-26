@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>E-Book</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="../style/style.css">
         <style>
                 .navbar {
                         background-color: #333;
@@ -28,10 +28,6 @@ if (!isset($_SESSION['username'])) {
 
                 .nav-link:hover {
                         color: #ddd;
-                }
-
-                .dashboard-container {
-                        padding: 20px;
                 }
 
                 .widget-card {
@@ -49,7 +45,6 @@ if (!isset($_SESSION['username'])) {
 
                 .chart-container {
                         height: 300px;
-                        /* Adjust the height based on your chart data */
                 }
 
                 .footer {
@@ -61,7 +56,6 @@ if (!isset($_SESSION['username'])) {
 
                 .book-cover-image {
                         max-width: 150px;
-                        /* Adjust the value to your preference */
                         height: auto;
                         margin-bottom: 10px;
                 }
@@ -80,7 +74,6 @@ if (!isset($_SESSION['username'])) {
 
                 .book-card {
                         flex: 0 0 calc(33.33% - 10px);
-                        /* Adjust the width as needed */
                         margin-bottom: 20px;
                         padding: 10px;
                         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
@@ -107,6 +100,12 @@ if (!isset($_SESSION['username'])) {
                                         </li>
                                         <li class="nav-item">
                                                 <a class="nav-link" href="../books/add_books.php">Add Books</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a href="../contact/contact.php" class="nav-link">Contact</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a href="../contact/about.php" class="nav-link">About Us</a>
                                         </li>
 
                                 </ul>

@@ -2,7 +2,11 @@
 session_start();
 
 $error = isset($_SESSION['login_error']) ? $_SESSION['login_error'] : "";
-unset($_SESSION['login_error']); // Clear the error message after displaying
+unset($_SESSION['login_error']);
+
+$_SESSION['user_id'] = $user_id;
+echo "Session user ID set: " . $_SESSION['user_id'];
+
 ?>
 
 <!DOCTYPE html>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../database/connect.php';
+echo "Session user ID: " . $_SESSION['user_id'];
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -15,7 +16,7 @@ $sql = "SELECT * FROM `ebook`.`users` WHERE id = ?";
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
-        echo "Prepare failed: " . $conn->error; // Debug statement
+        echo "Prepare failed: " . $conn->error; 
         exit();
 }
 
@@ -26,7 +27,7 @@ $result = $stmt->get_result();
 if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
 } else {
-        echo 'User not found.'; // Debug statement
+        echo 'User not found.';
         exit();
 }
 

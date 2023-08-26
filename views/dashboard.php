@@ -1,11 +1,12 @@
 <?php
-
-require '../database/connect.php';
 session_start();
+include '../database/connect.php';
+
 if (!isset($_SESSION['username'])) {
         header("Location: ../auth/login.php");
         exit;
 }
+
 ?>
 
 <!DOCTYPE html>

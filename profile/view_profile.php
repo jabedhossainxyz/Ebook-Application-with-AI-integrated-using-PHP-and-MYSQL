@@ -1,22 +1,17 @@
 <?php
 session_start();
-require_once '../database/connect.php';
-echo "Session user ID: " . $_SESSION['user_id'];
+include '../database/connect.php';
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../auth/login.php");
-    exit;
+if (isset($_SESSION['user_id'])) {
+        header("Location: view_profile.php");
 }
-
-// Fetch user's information from the database
 $userID = $_SESSION['user_id'];
 
 $sql = "SELECT * FROM `ebook`.`users` WHERE id = ?";
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
-        echo "Prepare failed: " . $conn->error; 
+        echo "Prepare failed: " . $conn->error; // Debug statement
         exit();
 }
 
@@ -27,7 +22,7 @@ $result = $stmt->get_result();
 if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
 } else {
-        echo 'User not found.';
+        echo 'User not found.'; // Debug statement
         exit();
 }
 
@@ -41,8 +36,7 @@ $conn->close();
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>View Profile</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <title>Document</title>
 </head>
 
 <body>

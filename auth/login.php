@@ -1,11 +1,10 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 $error = isset($_SESSION['login_error']) ? $_SESSION['login_error'] : "";
 unset($_SESSION['login_error']);
-
-$_SESSION['user_id'] = $user_id;
-echo "Session user ID set: " . $_SESSION['user_id'];
 
 ?>
 
@@ -80,7 +79,6 @@ echo "Session user ID set: " . $_SESSION['user_id'];
                 </div>
 
                 <?php
-                // Display error message if present
                 if (!empty($error)) {
                         echo '<div class="alert alert-danger alert-dismissible fade show small-error" role="alert">';
                         echo '<strong>Error!</strong> ' . $error;

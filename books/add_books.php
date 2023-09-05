@@ -21,8 +21,6 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <body>
-
-
         <div class="container d-flex justify-content-center align-items-center vh-100">
                 <div class="w-50">
                         <a class="btn btn-primary" href="../views/dashboard.php">

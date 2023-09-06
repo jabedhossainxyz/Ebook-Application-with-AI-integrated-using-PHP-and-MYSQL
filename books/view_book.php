@@ -1,8 +1,8 @@
 <?php
 require '../database/connect.php';
 
-
 session_start();
+
 if (!isset($_SESSION['username'])) {
     header("Location: ../auth/login.php");
     exit;
@@ -12,7 +12,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $bookId = $_GET['id'];
 
         // Fetch the book details from the database
-        $sql = "SELECT * FROM `books` WHERE id = ?";
+        $sql = "SELECT * FROM `books`.`ebook` WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i', $bookId); // Bind the parameter
         $stmt->execute();

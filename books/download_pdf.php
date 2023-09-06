@@ -1,8 +1,7 @@
 <?php
+session_start();
 require '../database/connect.php';
 
-
-session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: ../auth/login.php");
     exit;
@@ -11,10 +10,10 @@ if (!isset($_SESSION['username'])) {
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $bookId = $_GET['id'];
 
-    // Fetch the book details from the database
+    // Fetch the PDF content based on the book ID from the database
     $sql = "SELECT * FROM `books` WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $bookId); // Bind the parameter
+    $stmt->bind_param('i', $bookId);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -25,26 +24,21 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     $book = $result->fetch_assoc();
 
-    // Retrieve the PDF content from the database
     $pdfData = $book['book_file'];
-    $pdfFileName = $book['title'] . '.pdf';
-
-    // Save the PDF content to a temporary file
-    $tempPdfFilePath = tempnam(sys_get_temp_dir(), 'ebook_');
-    file_put_contents($tempPdfFilePath, $pdfData);
+    $filename = $book['title'] . '.pdf';
 
     // Set headers for download
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-    header('Content-Length: ' . filesize($tempPdfFilePath));
-    header('Cache-Control: must-revalidate');
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
     header('Pragma: public');
+    header('Content-Length: ' . strlen($pdfData));
 
     // Output the PDF data
-    readfile($tempPdfFilePath);
+    echo $pdfData;
     exit();
 } else {
     echo 'Invalid book ID.';
     exit();
 }
+?>

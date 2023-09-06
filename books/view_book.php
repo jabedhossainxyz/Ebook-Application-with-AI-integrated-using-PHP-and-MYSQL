@@ -53,10 +53,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 <body>
         <div class="book-details">
                 <?php
-                // Display the book cover image if available
                 if ($book['cover_image']) {
                         $imageData = $book['cover_image'];
-                        $imageFormat = 'image/png'; // Change this to 'image/jpeg' if the image format is JPEG
+                        $imageFormat = 'image/png'; 
                         $base64Image = 'data:' . $imageFormat . ';base64,' . base64_encode($imageData);
                         echo '<img src="' . $base64Image . '" alt="' . $book['title'] . '" class="book-cover">';
                 } else {
@@ -67,7 +66,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <p><?php echo $book['author']; ?></p>
                 <p>Published Year: <?php echo $book['published_year']; ?></p>
 
-                <!-- download button -->
                 <a class="btn btn-primary" href="../books/download_pdf.php?id=<?php echo $book['id']; ?>">Download PDF</a>
 
                 <a class="btn btn-primary" href="../views/dashboard.php">Back to Dashboard</a>

@@ -7,11 +7,7 @@
         <title>Add Book</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-        <!-- Include jQuery UI CSS -->
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-        <!-- Include jQuery and jQuery UI libraries -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
@@ -59,7 +55,7 @@
                 $(document).ready(function() {
                         // Initialize the Datepicker on the "published_year" input field
                         $("#published_year").datepicker({
-                                dateFormat: "yy-mm-dd", // Change the date format as needed
+                                dateFormat: "yy-mm-dd", 
                                 changeMonth: true,
                                 changeYear: true
                         });

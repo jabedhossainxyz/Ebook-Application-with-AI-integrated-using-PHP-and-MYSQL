@@ -1,16 +1,16 @@
 <?php
 session_start();
-
 include '../database/connect.php';
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['username'])) {
         header("Location: ../auth/login.php");
         exit;
 }
 
-$userID = $_SESSION['user_id'];
+$username = $_SESSION['username'];
 
-$sql = "SELECT * FROM `ebook`.`users` WHERE id=?";
+// Fetch user information based on the logged-in username
+$sql = "SELECT * FROM `ebook`.`users` WHERE username=?";
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
@@ -18,7 +18,7 @@ if (!$stmt) {
         exit;
 }
 
-$stmt->bind_param('i', $userID);
+$stmt->bind_param('s', $username);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -31,7 +31,6 @@ if ($result->num_rows === 1) {
 
 $stmt->close();
 $conn->close();
-
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +40,28 @@ $conn->close();
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile</title>
+
+        <style>
+                .container {
+                        max-width: 600px;
+                        margin: 0 auto;
+                        padding: 20px;
+                }
+
+                h2 {
+                        text-align: center;
+                        margin-bottom: 20px;
+                }
+
+                p {
+                        font-size: 18px;
+                        margin-bottom: 10px;
+                }
+
+                .btn-primary {
+                        margin-top: 20px;
+                }
+        </style>
 </head>
 
 <body>
@@ -52,6 +73,7 @@ $conn->close();
                 <p><strong>Mobile:</strong> <?php echo $user['mobile']; ?></p>
                 <a class="btn btn-primary" href="../views/dashboard.php">Back to Dashboard</a>
         </div>
+
 </body>
 
 </html>

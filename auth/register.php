@@ -1,21 +1,11 @@
-<?php
-require '../database/connect.php';
-
-if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
-        echo '<div class="alert alert-danger">Email already exists. Please use a different email.</div>';
-}
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="stylesheet" href="../style/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <title>Registration Page</title>
 
         <style>
@@ -36,6 +26,24 @@ if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
 
                 .nav-link:hover {
                         color: #ddd;
+                }
+
+                .profile-pic-preview {
+                        max-width: 100px;
+                        margin-left: 180px;
+                        object-fit: cover;
+                }
+
+                .form-control {
+                        width: 500px;
+                        margin: 0 auto;
+                        padding: 2px;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        font-size: 12px;
+                        display: block;
+                        box-sizing: border-box;
+
                 }
         </style>
 
@@ -64,6 +72,7 @@ if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
         </nav>
         <form class="registration-container" action="register_process.php" method="POST" onsubmit="return validateForm()" enctype="multipart/form-data">
                 <h2 class="text-center mb-4">Registration</h2>
+
                 <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
@@ -84,7 +93,8 @@ if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
                 <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
-                        <div id="passwordHelp" class="form-text text-danger" style="display: none;">Password must be at least 8 characters long.</div>
+                        <div id="passwordHelp" class="form-text text-danger" style="display: none;">Password must be at least 8
+                                characters long.</div>
                 </div>
 
                 <div class="mb-3">
@@ -92,11 +102,13 @@ if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
                         <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                         <div id="passwordMatchHelp" class="form-text text-danger" style="display: none;">Passwords must match.</div>
                 </div>
-
                 <div class="mb-3">
                         <label for="profile_picture" class="form-label">Profile Picture</label>
-                        <input type="file" class="form-control" id="profile_picture" name="profile_picture" required>
-                </div> <br>
+                        <input type="file" class="form-control" id="profile_picture" name="profile_picture" required onchange="previewImage(this)">
+                </div>
+                <div class="mb-3" id="image-preview-container" style="display: none;">
+                        <img id="image-preview" class="profile-pic-preview" alt="Profile Image Preview">
+                </div>
                 <div class="button-group">
                         <button type="submit" class="btn btn-primary">Register</button>
                         <button type="reset" class="btn btn-warning">Clear</button>
@@ -132,7 +144,25 @@ if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
 
                         return true; // Allow form submission
                 }
+
+                // Function to preview the selected image
+                function previewImage(input) {
+                        const imagePreview = document.getElementById('image-preview');
+                        const imagePreviewContainer = document.getElementById('image-preview-container');
+
+                        if (input.files && input.files[0]) {
+                                const reader = new FileReader();
+
+                                reader.onload = function(e) {
+                                        imagePreview.src = e.target.result;
+                                        imagePreviewContainer.style.display = 'block';
+                                };
+
+                                reader.readAsDataURL(input.files[0]);
+                        }
+                }
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxm" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 

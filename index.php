@@ -38,25 +38,25 @@
                                                 <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                                         </li>
                                         <li class="nav-item">
-                                                <a class="nav-link" href="../contact/contact.php">Contact</a>
+                                                <a class="nav-link" href="./contact/contact.php">Contact</a>
                                         </li>
                                         <li class="nav-item">
-                                                <a class="nav-link" href="../contact/about.php">About Us</a>
+                                                <a class="nav-link" href="./contact/about.php">About Us</a>
                                         </li>
                                 </ul>
                                 <ul class="navbar-nav ml-auto">
                                         <li class="nav-item">
-                                                <a class="nav-link" href="../auth/login.php">Login</a>
+                                                <a class="nav-link" href="./auth/login.php">Login</a>
                                         </li>
                                         <li class="nav-item">
-                                                <a class="nav-link" href="../auth/register.php">Registration</a>
+                                                <a class="nav-link" href="./auth/register.php">Registration</a>
                                         </li>
                                 </ul>
                         </div>
                 </div>
         </nav>
 
-        <img src="../img/banner.png" alt="banner">
+        <img src="img/banner.png" alt="banner">
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

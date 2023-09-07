@@ -24,17 +24,17 @@ form {
         margin-left: 500px;
 }
 
-/* .form-control {
+.form-control {
         width: 500px;
         margin: 0 auto;
-        padding: 0px;
+        padding: 2px;
         border: 1px solid #ccc;
         border-radius: 5px;
         font-size: 12px;
         display: block;
         box-sizing: border-box;
 
-} */
+}
 
 .form-check-input {
         margin-top: 0.3rem;

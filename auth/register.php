@@ -34,17 +34,8 @@
                         object-fit: cover;
                 }
 
-                .form-control {
-                        width: 500px;
-                        margin: 0 auto;
-                        padding: 2px;
-                        border: 1px solid #ccc;
-                        border-radius: 5px;
-                        font-size: 12px;
-                        display: block;
-                        box-sizing: border-box;
+               
 
-                }
         </style>
 
 </head>

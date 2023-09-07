@@ -62,7 +62,7 @@ if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
                         </div>
                 </div>
         </nav>
-        <form class="registration-container" action="register_process.php" method="POST" onsubmit="return validateForm()">
+        <form class="registration-container" action="register_process.php" method="POST" onsubmit="return validateForm()" enctype="multipart/form-data">
                 <h2 class="text-center mb-4">Registration</h2>
                 <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -93,6 +93,10 @@ if (isset($_GET['error']) && $_GET['error'] === 'email_exists') {
                         <div id="passwordMatchHelp" class="form-text text-danger" style="display: none;">Passwords must match.</div>
                 </div>
 
+                <div class="mb-3">
+                        <label for="profile_picture" class="form-label">Profile Picture</label>
+                        <input type="file" class="form-control" id="profile_picture" name="profile_picture" required>
+                </div> <br>
                 <div class="button-group">
                         <button type="submit" class="btn btn-primary">Register</button>
                         <button type="reset" class="btn btn-warning">Clear</button>

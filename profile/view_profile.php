@@ -32,7 +32,6 @@ if ($result->num_rows === 1) {
 $stmt->close();
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,9 +49,20 @@ $conn->close();
                         padding: 20px;
                 }
 
+                .profile-pic {
+                        width: 150px;
+                        height: 150px;
+                        border-radius: 50%;
+                        /* Make it circular */
+                        object-fit: cover;
+                        /* Ensure the image covers the circle */
+                        margin: 0 auto;
+                        display: block;
+                }
+
                 h2 {
                         text-align: center;
-                        margin-bottom: 20px;
+                        margin-top: 20px;
                 }
 
                 p {
@@ -68,7 +78,16 @@ $conn->close();
 
 <body>
         <div class="container mt-5">
-                <h2>Profile Information</h2>
+                <?php echo $user['profile_picture'];
+                if (file_exists($user['profile_picture'])) {
+                        echo "Image exists.";
+                } else {
+                        echo "Image does not exist.";
+                }
+
+                ?>
+
+                <img class="profile-pic" src="<?php echo $user['profile_picture']; ?>" alt="Profile Picture">
                 <p><strong>Name:</strong> <?php echo $user['name']; ?></p>
                 <p><strong>Username:</strong> <?php echo $user['username']; ?></p>
                 <p><strong>Email:</strong> <?php echo $user['email']; ?></p>

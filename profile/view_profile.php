@@ -79,7 +79,13 @@ $conn->close();
 
 <body>
         <div class="container mt-5">
+                <?php
+                // Debugging statement
+                echo "Profile Picture Path: " . $user['profile_picture'];
+                ?>
+
                 <img class="profile-pic" src="<?php echo $user['profile_picture']; ?>" alt="Profile Picture">
+
                 <p><strong>Name:</strong> <?php echo $user['name']; ?></p>
                 <p><strong>Username:</strong> <?php echo $user['username']; ?></p>
                 <p><strong>Email:</strong> <?php echo $user['email']; ?></p>

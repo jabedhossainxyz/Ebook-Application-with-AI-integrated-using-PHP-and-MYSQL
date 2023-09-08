@@ -1,4 +1,3 @@
-
 <?php
 include '../database/connect.php';
 
@@ -9,16 +8,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $mobile = $_POST['mobile'];
     $password = $_POST['password'];
 
-    if (isset($_FILES['profile_picture'])) {
-        $profilePicture = $_FILES['profile_picture'];
-        $profilePicturePath = 'profile_picture/' . uniqid() . "_" . $profilePicture['name'];
-        move_uploaded_file($profilePicture['tmp_name'], $profilePicturePath);
+    if (isset($_FILES['profile_picture']) && !empty($_FILES['profile_picture']['tmp_name'])) {
+        $profilePicture = file_get_contents($_FILES['profile_picture']['tmp_name']);
+    } else {
+        $profilePicture = null; // Set to null if no profile picture is uploaded
     }
+
     $sql = "INSERT INTO `ebook`.`users` (name, username, email, mobile, password, profile_picture) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        $stmt->bind_param('ssssss', $name, $username, $email, $mobile, $password, $profilePicturePath);
+        $stmt->bind_param('sssssb', $name, $username, $email, $mobile, $password, $profilePicture);
         if ($stmt->execute()) {
             // Registration successful, redirect to login.php
             header("Location: login.php");
@@ -34,4 +34,3 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $conn->close();
 }
-?>

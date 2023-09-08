@@ -80,12 +80,15 @@ $conn->close();
 <body>
         <div class="container mt-5">
                 <?php
-                // Debugging statement
-                echo "Profile Picture Path: " . $user['profile_picture'];
+                // Display the user's profile picture if available, otherwise show the default profile picture
+                if (!empty($user['profile_picture'])) {
+                        echo '<img class="profile-pic" src="' . $user['profile_picture'] . '" alt="Profile Picture">';
+                } else {
+                        // Provide a path to your default profile picture here
+                        $defaultProfilePicturePath = 'default_profile.png'; // Replace with the actual path to your default profile picture
+                        echo '<img class="profile-pic" src="' . $defaultProfilePicturePath . '" alt="Default Profile Picture">';
+                }
                 ?>
-
-                <img class="profile-pic" src="<?php echo $user['profile_picture']; ?>" alt="Profile Picture">
-
                 <p><strong>Name:</strong> <?php echo $user['name']; ?></p>
                 <p><strong>Username:</strong> <?php echo $user['username']; ?></p>
                 <p><strong>Email:</strong> <?php echo $user['email']; ?></p>

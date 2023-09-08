@@ -6,6 +6,8 @@
 
 .login-container,
 .registration-container {
+        margin-left: auto;
+        margin-right: auto;
         max-width: 900px;
         background-color: white;
         padding: 20px;
@@ -46,7 +48,7 @@ form {
 }
 
 .form-text {
-        margin-left: 175px;
+        margin-left: 5px;
 }
 
 .registration-container label,
@@ -55,21 +57,21 @@ form {
 .login-container label,
 .login-container input,
 .login-container .btn {
-        font-size: 15px;
-}
-
-.registration-container small,
-.login-container small {
-        font-size: 10px;
-        text-align: center;
+        font-size: 12px;
 }
 
 .registration-container label,
 .registration-container small,
 .login-container small,
 .login-container label {
+        margin-left: 5px;
         display: block;
-        margin-left: 175px;
+}
+
+.registration-container small,
+.login-container small {
+        font-size: 10px;
+        text-align: center;
 }
 
 .registration-container .btn,
@@ -80,7 +82,7 @@ form {
 
 .button-group {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         margin-top: 10px;
 
 }

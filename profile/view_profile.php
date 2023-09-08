@@ -32,6 +32,7 @@ if ($result->num_rows === 1) {
 $stmt->close();
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,15 +79,6 @@ $conn->close();
 
 <body>
         <div class="container mt-5">
-                <?php echo $user['profile_picture'];
-                if (file_exists($user['profile_picture'])) {
-                        echo "Image exists.";
-                } else {
-                        echo "Image does not exist.";
-                }
-
-                ?>
-
                 <img class="profile-pic" src="<?php echo $user['profile_picture']; ?>" alt="Profile Picture">
                 <p><strong>Name:</strong> <?php echo $user['name']; ?></p>
                 <p><strong>Username:</strong> <?php echo $user['username']; ?></p>
@@ -98,7 +90,6 @@ $conn->close();
                         </a>
                 </div>
         </div>
-
 </body>
 
 </html>

@@ -67,7 +67,7 @@ unset($_SESSION['login_error']);
         </nav>
 
         <form class="login-container" action="login_process.php" method="POST">
-                <h2 class="text-center mb-4">Login</h2>
+                <h3 class="text-center mb-2">Login</h3>
 
                 <div class="mb-3">
                         <label for="username" class="form-label">Username</label>

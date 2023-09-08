@@ -59,7 +59,7 @@
                 </div>
         </nav>
         <form class="registration-container" action="register_process.php" method="POST" onsubmit="return validateForm()" enctype="multipart/form-data">
-                <h2 class="text-center mb-4">Registration</h2>
+                <h3 class="text-center mb-2">Registration</h3>
 
                 <div class="mb-3">
                         <label for="name" class="form-label">Name</label>

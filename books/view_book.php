@@ -3,18 +3,13 @@ require '../database/connect.php';
 
 session_start();
 
-if (!isset($_SESSION['username'])) {
-        header("Location: ../auth/login.php");
-        exit;
-}
-
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $bookId = $_GET['id'];
 
         // Fetch the book details from the database
         $sql = "SELECT * FROM `books` WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('i', $bookId); // Bind the parameter
+        $stmt->bind_param('i', $bookId);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -24,10 +19,22 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         }
 
         $book = $result->fetch_assoc();
+
+        // Display the book cover image if available
+        if ($book['cover_image']) {
+                $imageData = $book['cover_image'];
+                $imageFormat = 'image/jpeg'; // Adjust this based on the actual format (e.g., 'image/png' for PNG)
+                $base64Image = 'data:' . $imageFormat . ';base64,' . base64_encode($imageData);
+                echo '<img src="' . $base64Image . '" alt="' . $book['title'] . '" class="book-cover">';
+        } else {
+                echo '<p>No cover image available</p>';
+        }
 } else {
         echo 'Invalid book ID.';
         exit();
 }
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>

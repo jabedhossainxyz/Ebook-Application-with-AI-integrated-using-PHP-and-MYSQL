@@ -4,12 +4,34 @@
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Display Image</title>
+        <title>Display Book Cover</title>
 </head>
 
 <body>
-        <h1>Book Cover Image</h1>
-        <img src="test.php" alt="Book Cover">
+        <h1>Book Cover</h1>
+        <div id="bookCoverContainer">
+                <!-- The PHP code will generate and insert the image here -->
+                <?php 
+                require 'test.php';
+                ?>
+        </div>
+
+        <!-- JavaScript to fetch and display the image -->
+        <script>
+                // Fetch the image from the PHP script and insert it into the container
+                fetch('test.php')
+                        .then(response => response.text())
+                        .then(base64Image => {
+                                const bookCoverContainer = document.getElementById('bookCoverContainer');
+                                const img = document.createElement('img');
+                                img.src = base64Image;
+                                img.alt = 'Book Cover';
+                                bookCoverContainer.appendChild(img);
+                        })
+                        .catch(error => {
+                                console.error('Error fetching or displaying the image:', error);
+                        });
+        </script>
 </body>
 
 </html>

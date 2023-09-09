@@ -2,7 +2,7 @@
 require './database/connect.php';
 
 // Fetch an example book cover image (replace 1 with an actual book ID)
-$bookId = 12; // Replace with the desired book ID
+$bookId = 12;
 $sql = "SELECT * FROM `ebook`.`books` WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $bookId);
@@ -11,20 +11,10 @@ $result = $stmt->get_result();
 
 if ($result->num_rows === 1) {
     $book = $result->fetch_assoc();
-    
-    // Check if cover_image column is not empty
-    if (!empty($book['cover_image'])) {
-        $imageData = $book['cover_image'];
-        $imageFormat = 'image/jpeg'; // Adjust this based on the actual image format
-        
-        // Set the appropriate content type header
-        header('Content-Type: ' . $imageFormat);
-        
-        // Display the image
-        echo $imageData;
-    } else {
-        echo 'No cover image available for book with ID ' . $bookId;
-    }
+    $imageData = $book['cover_image'];
+    $imageFormat = 'image/jpeg'; // Adjust this based on the actual format
+    $base64Image = 'data:' . $imageFormat . ';base64,' . base64_encode($imageData);
+    echo $base64Image;
 } else {
     echo 'Book not found.';
 }

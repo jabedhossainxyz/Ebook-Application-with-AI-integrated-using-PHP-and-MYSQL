@@ -1,6 +1,5 @@
 <?php
-require '../database/connect.php';
-session_start();
+include '../database/connect.php';
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $bookId = $_GET['id'];
@@ -20,11 +19,15 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $book = $result->fetch_assoc();
 
         // Display the book cover image if available
-        if ($book['cover_image']) {
-                $imageData = $book['cover_image'];
-                $imageFormat = 'image/jpeg'; // You can adjust this based on the actual format
-                $base64Image = 'data:' . $imageFormat . ';base64,' . base64_encode($imageData);
-                echo '<img src="' . $base64Image . '" alt="' . $book['title'] . '" class="book-cover">';
+        if (!empty($book['cover_image'])) {
+                $coverImageData = $book['cover_image'];
+                $coverImageFormat = 'image/jpeg'; // You can adjust this based on the actual format
+
+                // Create a data URI for the book cover image
+                $coverImageBase64 = 'data:' . $coverImageFormat . ';base64,' . base64_encode($coverImageData);
+
+                // Display the book cover image using an <img> tag
+                echo '<img src="' . $coverImageBase64 . '" alt="' . $book['title'] . '" class="book-cover">';
         } else {
                 echo '<p>No cover image available</p>';
         }
@@ -59,13 +62,8 @@ $conn->close();
 <body>
         <div class="book-details">
                 <?php
-                if ($book['cover_image']) {
-                        $imageData = $book['cover_image'];
-                        $imageFormat = 'image/png';
-                        $base64Image = 'data:' . $imageFormat . ';base64,' . base64_encode($imageData);
-                        echo '<img src="data:image/png;base64,' . base64_encode($imageData) . '" alt="' . $book['title'] . '" class="book-cover">';
-                } else {
-                        echo '<p>No cover image available</p>';
+                if (!empty($book['cover_image'])) {
+                        // Displaying the book cover image is already handled above
                 }
                 ?>
                 <h1><?php echo $book['title']; ?></h1>

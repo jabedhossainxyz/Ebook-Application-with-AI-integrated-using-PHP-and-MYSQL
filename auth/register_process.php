@@ -8,28 +8,58 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $mobile = $_POST['mobile'];
     $password = $_POST['password'];
 
+    $profilePicturePath = ""; // Initialize the profile picture path
+
     if (isset($_FILES['profile_picture']) && !empty($_FILES['profile_picture']['tmp_name'])) {
-        $profilePicture = file_get_contents($_FILES['profile_picture']['tmp_name']);
-    } else {
-        $profilePicture = null; // Set to null if no profile picture is uploaded
-    }
+        $profilePictureTmpName = $_FILES['profile_picture']['tmp_name'];
+        $profilePictureName = $_FILES['profile_picture']['name'];
 
-    $sql = "INSERT INTO `ebook`.`users` (name, username, email, mobile, password, profile_picture) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
+        // Define the upload directory and move the uploaded file
+        $uploadDirectory = "../uploads/profile_pictures/";
+        $profilePicturePath = $uploadDirectory . $profilePictureName;
 
-    if ($stmt) {
-        $stmt->bind_param('sssssb', $name, $username, $email, $mobile, $password, $profilePicture);
-        if ($stmt->execute()) {
-            // Registration successful, redirect to login.php
-            header("Location: login.php");
-            exit;
+        if (move_uploaded_file($profilePictureTmpName, $profilePicturePath)) {
+            // File uploaded successfully, continue with database insertion
+            $sql = "INSERT INTO `ebook`.`users` (name, username, email, mobile, password, profile_picture) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+
+            if ($stmt) {
+                $stmt->bind_param('ssssss', $name, $username, $email, $mobile, $password, $profilePicturePath);
+                if ($stmt->execute()) {
+                    // Registration successful, redirect to login.php
+                    header("Location: login.php");
+                    exit;
+                } else {
+                    // Registration failed
+                    echo "Error: " . $stmt->error;
+                }
+                $stmt->close();
+            } else {
+                echo "Prepare failed: " . $conn->error;
+            }
         } else {
-            // Registration failed
-            echo "Error: " . $stmt->error;
+            // Error in uploading the file
+            echo "Error uploading profile picture.";
         }
-        $stmt->close();
     } else {
-        echo "Prepare failed: " . $conn->error;
+        // No profile picture uploaded, set the path to an empty string
+        $sql = "INSERT INTO `ebook`.`users` (name, username, email, mobile, password, profile_picture) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param('ssssss', $name, $username, $email, $mobile, $password, $profilePicturePath);
+            if ($stmt->execute()) {
+                // Registration successful, redirect to login.php
+                header("Location: login.php");
+                exit;
+            } else {
+                // Registration failed
+                echo "Error: " . $stmt->error;
+            }
+            $stmt->close();
+        } else {
+            echo "Prepare failed: " . $conn->error;
+        }
     }
 
     $conn->close();

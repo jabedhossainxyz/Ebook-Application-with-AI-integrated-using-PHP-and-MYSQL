@@ -1,6 +1,5 @@
 <?php
 require '../database/connect.php';
-
 session_start();
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -23,7 +22,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         // Display the book cover image if available
         if ($book['cover_image']) {
                 $imageData = $book['cover_image'];
-                $imageFormat = 'image/jpeg'; // Adjust this based on the actual format (e.g., 'image/png' for PNG)
+                $imageFormat = 'image/jpeg'; // You can adjust this based on the actual format
                 $base64Image = 'data:' . $imageFormat . ';base64,' . base64_encode($imageData);
                 echo '<img src="' . $base64Image . '" alt="' . $book['title'] . '" class="book-cover">';
         } else {

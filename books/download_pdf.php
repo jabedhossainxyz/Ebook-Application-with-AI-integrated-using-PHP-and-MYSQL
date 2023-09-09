@@ -10,11 +10,16 @@ if (!isset($_SESSION['username'])) {
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $bookId = $_GET['id'];
 
-    // Fetch the PDF content based on the book ID from the database
-    $sql = "SELECT * FROM `books` WHERE id = ?";
+    // Fetch the PDF file path based on the book ID from the database
+    $sql = "SELECT book_file, title FROM `books` WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $bookId);
-    $stmt->execute();
+
+    if (!$stmt->execute()) {
+        echo 'Error executing the database query.';
+        exit();
+    }
+
     $result = $stmt->get_result();
 
     if ($result->num_rows === 0) {
@@ -24,31 +29,25 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     $book = $result->fetch_assoc();
 
-    $pdfData = $book['book_file'];
+    $pdfFilePath = $book['book_file'];
     $filename = $book['title'] . '.pdf';
 
-    // Check if PDF data is empty or invalid
-    if (empty($pdfData) || !is_string($pdfData)) {
-        echo 'Invalid PDF data.';
+    // Check if the file exists
+    if (file_exists($pdfFilePath)) {
+        // Set headers for download
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($pdfFilePath));
+
+        // Output the PDF file
+        readfile($pdfFilePath);
+        exit();
+    } else {
+        echo 'PDF file not found.';
         exit();
     }
-
-    // Check if the PDF data starts with "%PDF" (a common PDF file signature)
-    if (substr($pdfData, 0, 4) !== '%PDF') {
-        echo 'Invalid PDF file format.';
-        exit();
-    }
-
-    // Set headers for download
-    header('Content-Type: application/pdf');
-    header('Content-Disposition: attachment; filename="' . $filename . '"');
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    header('Pragma: public');
-    header('Content-Length: ' . strlen($pdfData));
-
-    // Output the PDF data
-    echo $pdfData;
-    exit();
 } else {
     echo 'Invalid book ID.';
     exit();

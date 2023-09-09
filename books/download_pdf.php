@@ -27,6 +27,18 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $pdfData = $book['book_file'];
     $filename = $book['title'] . '.pdf';
 
+    // Check if PDF data is empty or invalid
+    if (empty($pdfData) || !is_string($pdfData)) {
+        echo 'Invalid PDF data.';
+        exit();
+    }
+
+    // Check if the PDF data starts with "%PDF" (a common PDF file signature)
+    if (substr($pdfData, 0, 4) !== '%PDF') {
+        echo 'Invalid PDF file format.';
+        exit();
+    }
+
     // Set headers for download
     header('Content-Type: application/pdf');
     header('Content-Disposition: attachment; filename="' . $filename . '"');

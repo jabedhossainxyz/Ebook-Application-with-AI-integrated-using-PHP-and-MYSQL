@@ -4,8 +4,8 @@ require '../database/connect.php';
 session_start();
 
 if (!isset($_SESSION['username'])) {
-    header("Location: ../auth/login.php");
-    exit;
+        header("Location: ../auth/login.php");
+        exit;
 }
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -55,9 +55,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <?php
                 if ($book['cover_image']) {
                         $imageData = $book['cover_image'];
-                        $imageFormat = 'image/png'; 
+                        $imageFormat = 'image/png';
                         $base64Image = 'data:' . $imageFormat . ';base64,' . base64_encode($imageData);
-                        echo '<img src="' . $base64Image . '" alt="' . $book['title'] . '" class="book-cover">';
+                        echo '<img src="data:image/png;base64,' . base64_encode($imageData) . '" alt="' . $book['title'] . '" class="book-cover">';
                 } else {
                         echo '<p>No cover image available</p>';
                 }

@@ -61,7 +61,8 @@ if (!isset($_SESSION['username'])) {
                         margin-bottom: 10px;
                 }
 
-                .books-container {
+                .books-container,
+                article-container {
                         display: flex;
                         flex-wrap: wrap;
                         justify-content: space-between;
@@ -154,7 +155,13 @@ if (!isset($_SESSION['username'])) {
                                 $conn->close();
                                 ?>
                         </div>
+
                         <div class="row">
+                                <div class="col-lg-15">
+                                        <div class="widget-card">
+                                                <h3 class="widget-title">Artice</h3>
+                                        </div>
+                                </div>
                                 <div class="col-lg-6">
                                         <div class="widget-card">
                                                 <h3 class="widget-title">Reading Overview</h3>

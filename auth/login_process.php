@@ -7,14 +7,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Using prepared statement to prevent SQL injection
-    $query = "SELECT * FROM `ebook`.`users` WHERE username = ? AND password = ?";
+    $query = "SELECT * FROM `ebook`.`users` WHERE username = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ss", $username, $password);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
-    if ($user) {
+    if ($user && password_verify($password, $user['password'])) {
         $_SESSION['username'] = $username;
         header('Location: ../views/dashboard.php');
         exit();

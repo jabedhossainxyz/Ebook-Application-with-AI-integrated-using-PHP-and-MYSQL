@@ -61,8 +61,7 @@ if (!isset($_SESSION['username'])) {
                         margin-bottom: 10px;
                 }
 
-                .books-container,
-                article-container {
+                .books-container {
                         display: flex;
                         flex-wrap: wrap;
                         justify-content: space-between;
@@ -157,9 +156,18 @@ if (!isset($_SESSION['username'])) {
                         </div>
 
                         <div class="row">
-                                <div class="col-lg-15">
+                                <div class="col-lg-6">
                                         <div class="widget-card">
                                                 <h3 class="widget-title">Artice</h3>
+                                                <?php
+                                                include '../articles/articles_form.php'; ?>
+                                        </div>
+                                </div>
+                                <div class="col-lg-6">
+                                        <div class="widget-card">
+                                                <h3 class="widget-title">Artice</h3>
+                                                <?php
+                                                include '../articles/view_article.php'; ?>
                                         </div>
                                 </div>
                                 <div class="col-lg-6">
